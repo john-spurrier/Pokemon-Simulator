@@ -1,0 +1,624 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.start-game-container {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 600px;
+}
+
+.deck-info {
+  background: rgba(255,255,255,0.1);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.deck-info h3 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.deck-info p {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.start-game {
+  background: linear-gradient(45deg, #4CAF50, #45a049) !important;
+  margin-bottom: 15px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.playmat {
+  background: linear-gradient(45deg, #2d5a27 0%, #1a3d1a 100%);
+  border: 3px solid #8b4513;
+  border-radius: 20px;
+  padding: 30px;
+  height: 700px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.prize-cards-area {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-align: center;
+}
+
+.prize-cards-area h3 {
+  color: white;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.prize-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.prize-card {
+  width: 80px;
+  height: 120px;
+  background: linear-gradient(45deg, #1a1a1a, #333);
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.prize-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255,215,0,0.4);
+}
+
+.prize-card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffd700;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.prize-card-back svg {
+  margin-bottom: 5px;
+}
+
+.active-pokemon-area {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  min-width: 200px;
+}
+
+.active-pokemon-area h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.active-pokemon {
+  width: 120px;
+  height: 180px;
+  margin: 0 auto;
+  position: relative;
+  border: 3px solid #ffd700;
+  border-radius: 10px;
+  background: white;
+}
+
+.active-pokemon .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.active-pokemon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.active-pokemon:hover .active-pokemon-overlay {
+  opacity: 1;
+}
+
+.active-pokemon-overlay button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.active-pokemon-placeholder {
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
+  padding: 20px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+}
+
+.active-pokemon-placeholder p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.bench-area {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  min-width: 700px;
+}
+
+.bench-area h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.bench-slots {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.bench-slot {
+  width: 100px;
+  height: 150px;
+  position: relative;
+}
+
+.bench-pokemon {
+  width: 100px;
+  height: 150px;
+  position: relative;
+  border: 2px solid #4a90e2;
+  border-radius: 8px;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.bench-pokemon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(74,144,226,0.4);
+}
+
+.bench-pokemon .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.bench-pokemon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  gap: 5px;
+}
+
+.bench-pokemon:hover .bench-pokemon-overlay {
+  opacity: 1;
+}
+
+.bench-pokemon-overlay button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.remove-bench-btn {
+  background: #ff9500 !important;
+  font-size: 1rem !important;
+  padding: 4px 6px !important;
+  border-radius: 50% !important;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bench-slot-placeholder {
+  width: 100px;
+  height: 150px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.deck-area {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.deck {
+  width: 120px;
+  height: 180px;
+  background: linear-gradient(45deg, #1a1a1a, #333);
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.deck:hover {
+  transform: translateY(-5px);
+}
+
+.deck::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  border-radius: 8px;
+  z-index: -1;
+}
+
+.deck-count {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.hand-area {
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  min-height: 250px;
+}
+
+.hand-area h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.hand-cards {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 200px;
+}
+
+.card {
+  width: 120px;
+  height: 180px;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 10px;
+  cursor: grab;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  position: relative;
+  user-select: none;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.card.dragging {
+  cursor: grabbing;
+  transform: rotate(5deg);
+  z-index: 1000;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-overlay button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-button {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+.search-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.search-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.search-result-card {
+  width: 120px;
+  height: 180px;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.search-result-card:hover {
+  transform: scale(1.05);
+}
+
+.health-editor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 1001;
+}
+
+.health-input {
+  width: 80px;
+  padding: 8px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.health-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.health-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.health-button.save {
+  background: #4CAF50;
+  color: white;
+}
+
+.health-button.cancel {
+  background: #f44336;
+  color: white;
+}
+
+.file-input-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input-label {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.file-input-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+.loading {
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+.error {
+  background: #ff6b6b;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+} 
