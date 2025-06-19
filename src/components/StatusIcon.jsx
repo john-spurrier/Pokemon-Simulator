@@ -1,6 +1,6 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-import { Zap, Skull, Flame, RotateCcw } from 'lucide-react';
+import { Zap, Skull, Flame, Shell, Bed } from 'lucide-react';
 
 const StatusIcon = ({ type, position, onPositionChange, onRemove }) => {
   const getIcon = () => {
@@ -12,9 +12,9 @@ const StatusIcon = ({ type, position, onPositionChange, onRemove }) => {
       case 'fire':
         return <Flame size={20} />;
       case 'spiral':
-        return <RotateCcw size={20} />;
+        return <Shell size={20} />;
       case 'z':
-        return <span style={{ fontSize: '20px', fontWeight: 'bold' }}>Z</span>;
+        return <Bed size={20} />;
       default:
         return null;
     }
@@ -29,9 +29,9 @@ const StatusIcon = ({ type, position, onPositionChange, onRemove }) => {
       case 'fire':
         return '#FF4500'; // Orange red
       case 'spiral':
-        return '#4169E1'; // Royal blue
+        return '#32CD32'; // Royal blue
       case 'z':
-        return '#32CD32'; // Lime green
+        return '#4169E1'; // Lime green
       default:
         return '#666';
     }

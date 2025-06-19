@@ -1,13 +1,13 @@
 import React from 'react';
-import { Zap, Skull, Flame, RotateCcw } from 'lucide-react';
+import { Zap, Skull, Flame, Shell, Bed } from 'lucide-react';
 
 const StatusIconPalette = ({ onAddStatusIcon }) => {
   const statusTypes = [
-    { type: 'lightning', icon: <Zap size={20} />, color: '#FFD700', label: 'Lightning' },
-    { type: 'poison', icon: <Skull size={20} />, color: '#8B008B', label: 'Poison' },
-    { type: 'fire', icon: <Flame size={20} />, color: '#FF4500', label: 'Fire' },
-    { type: 'spiral', icon: <RotateCcw size={20} />, color: '#4169E1', label: 'Spiral' },
-    { type: 'z', icon: <span style={{ fontSize: '20px', fontWeight: 'bold' }}>Z</span>, color: '#32CD32', label: 'Z' }
+    { type: 'lightning', icon: <Zap size={20} />, color: '#FFD700', label: 'Paralyzed' },
+    { type: 'poison', icon: <Skull size={20} />, color: '#8B008B', label: 'Poisoned' },
+    { type: 'fire', icon: <Flame size={20} />, color: '#FF4500', label: 'Burned' },
+    { type: 'spiral', icon: <Shell size={20} />, color: '#32CD32', label: 'Confused' },
+    { type: 'z', icon: <Bed size={20} />, color: '#4169E1', label: 'Asleep' }
   ];
 
   return (
