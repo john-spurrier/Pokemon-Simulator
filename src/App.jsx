@@ -9,6 +9,7 @@ import AttachCardModal from './components/AttachCardModal';
 import AttachedCardsModal from './components/AttachedCardsModal';
 import StatusIcon from './components/StatusIcon';
 import StatusIconPalette from './components/StatusIconPalette';
+import Coin from './components/Coin';
 
 function App() {
   const [deck, setDeck] = useState([]);
@@ -688,6 +689,9 @@ function App() {
                 </div>
               </div>
             </div>
+
+            {/* Coin */}
+            <Coin />
 
             {/* Controls */}
             <div className="controls">
