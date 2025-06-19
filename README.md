@@ -4,27 +4,27 @@ A modern, interactive Pokemon Trading Card Game simulator built with React. Load
 
 ## Features
 
-### 🎴 Card Management
+### Card Management
 - **Load 60 Cards**: Select exactly 60 card images from your computer
 - **Automatic Shuffling**: Shuffle your deck with one click
 - **Draw Cards**: Click the deck to draw cards to your hand
 
-### 🎮 Interactive Playmat
+### Interactive Playmat
 - **Drag & Drop**: Move cards from your hand to the playmat
 - **Free Positioning**: Place cards anywhere on the game board
 - **Visual Feedback**: Hover effects and smooth animations
 
-### ⚡ Game Controls
+### Game Controls
 - **Shuffle Deck**: Randomize your deck order
 - **Search Deck**: Find specific cards and add them to your hand
 - **Reset Game**: Clear the playmat and reshuffle
 
-### ❤️ Health System
+###  Health System
 - **Health Tracking**: Each card has customizable health points
 - **Easy Editing**: Click on cards to modify their health values
 - **Visual Display**: Health shown with heart icons
 
-### 🔍 Advanced Features
+### Advanced Features
 - **Deck Search**: Search through your entire deck by card name
 - **Real-time Filtering**: Instant search results as you type
 - **Responsive Design**: Works on desktop and tablet devices
@@ -144,10 +144,6 @@ A modern, interactive Pokemon Trading Card Game simulator built with React. Load
 
 Feel free to submit issues, feature requests, or pull requests to improve the simulator!
 
-## License
-
-This project is open source and available under the MIT License.
-
 ---
 
-**Enjoy your Pokemon TCG battles!** 🎮⚡ 
+**Enjoy your Pokemon TCG battles!** 
