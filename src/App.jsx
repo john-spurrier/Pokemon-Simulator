@@ -10,6 +10,7 @@ import AttachedCardsModal from './components/AttachedCardsModal';
 import StatusIcon from './components/StatusIcon';
 import StatusIconPalette from './components/StatusIconPalette';
 import Coin from './components/Coin';
+import CardCloseUpModal from './components/CardCloseUpModal';
 
 function App() {
   const [deck, setDeck] = useState([]);
@@ -31,6 +32,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [statusIcons, setStatusIcons] = useState([]);
+  const [showCardCloseUp, setShowCardCloseUp] = useState(false);
+  const [closeUpCard, setCloseUpCard] = useState(null);
   const fileInputRef = useRef(null);
 
   // Load cards from folder
@@ -443,6 +446,12 @@ function App() {
     setStatusIcons(prev => prev.filter(icon => icon.id !== id));
   };
 
+  // Show card close-up
+  const handleCardCloseUp = (card) => {
+    setCloseUpCard(card);
+    setShowCardCloseUp(true);
+  };
+
   return (
     <div className="app">
       <div className="header">
@@ -522,6 +531,7 @@ function App() {
                       setSelectedCard(card);
                       setShowHealthEditor(true);
                     }}
+                    onCloseUp={handleCardCloseUp}
                   />
                   {activePokemon.attachedCards.length > 0 && (
                     <div className="attached-cards-indicator">
@@ -535,6 +545,13 @@ function App() {
                     }}>
                       <Heart size={16} />
                       {activePokemon.health}
+                    </button>
+                    <button 
+                      className="closeup-button"
+                      onClick={() => handleCardCloseUp(activePokemon)}
+                      title="View close-up"
+                    >
+                      <Eye size={16} />
                     </button>
                     <button 
                       className="discard-btn"
@@ -600,6 +617,7 @@ function App() {
                               setSelectedCard(card);
                               setShowHealthEditor(true);
                             }}
+                            onCloseUp={handleCardCloseUp}
                           />
                           {benchCard.attachedCards.length > 0 && (
                             <div className="attached-cards-indicator">
@@ -613,6 +631,13 @@ function App() {
                             }}>
                               <Heart size={16} />
                               {benchCard.health}
+                            </button>
+                            <button 
+                              className="closeup-button"
+                              onClick={() => handleCardCloseUp(benchCard)}
+                              title="View close-up"
+                            >
+                              <Eye size={16} />
                             </button>
                             <button 
                               className="remove-bench-btn"
@@ -753,7 +778,7 @@ function App() {
                       }
                     }
                     
-                    // Check if dropped on bench area
+                    // Check if dropped on bench area with improved slot detection
                     const benchArea = document.querySelector('.bench-area');
                     if (benchArea) {
                       const benchRect = benchArea.getBoundingClientRect();
@@ -762,25 +787,71 @@ function App() {
                       
                       if (cardCenterX >= benchRect.left && cardCenterX <= benchRect.right &&
                           cardCenterY >= benchRect.top && cardCenterY <= benchRect.bottom) {
-                        placeCardOnBench(card.id);
-                        return;
+                        // Find the specific bench slot
+                        const benchSlots = document.querySelectorAll('.bench-slot');
+                        let slotFound = false;
+                        for (let i = 0; i < benchSlots.length; i++) {
+                          const slotRect = benchSlots[i].getBoundingClientRect();
+                          if (cardCenterX >= slotRect.left && cardCenterX <= slotRect.right &&
+                              cardCenterY >= slotRect.top && cardCenterY <= slotRect.bottom) {
+                            // Check if this slot is empty
+                            if (!benchPokemon[i]) {
+                              placeCardOnBench(card.id);
+                              slotFound = true;
+                              break;
+                            } else {
+                              // Slot is occupied, don't place card
+                              slotFound = true;
+                              break;
+                            }
+                          }
+                        }
+                        if (slotFound) {
+                          return;
+                        }
                       }
                     }
                   }}
                 >
                   <div className="card">
                     <img src={card.image} alt={card.name} className="card-image" />
+                    <div className="card-health-display">
+                      <span className="health-text">HP: {card.health}</span>
+                    </div>
                     <div className="card-overlay">
-                      <button 
-                        className="discard-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToDiscardPile(card.id, 'hand');
-                        }}
-                        title="Discard this card"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div className="card-overlay-buttons">
+                        <button 
+                          className="health-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedCard(card);
+                            setShowHealthEditor(true);
+                          }}
+                          title="Edit health"
+                        >
+                          HP: {card.health}
+                        </button>
+                        <button 
+                          className="closeup-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCardCloseUp(card);
+                          }}
+                          title="View close-up"
+                        >
+                          <Eye size={16} />
+                        </button>
+                        <button 
+                          className="discard-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToDiscardPile(card.id, 'hand');
+                          }}
+                          title="Discard this card"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Draggable>
@@ -847,6 +918,17 @@ function App() {
           }}
           onRemoveCard={(cardIndex) => {
             removeAttachedCard(selectedPokemon.id, cardIndex, selectedPokemon.location);
+          }}
+        />
+      )}
+
+      {/* Card Close Up Modal */}
+      {showCardCloseUp && closeUpCard && (
+        <CardCloseUpModal
+          card={closeUpCard}
+          onClose={() => {
+            setShowCardCloseUp(false);
+            setCloseUpCard(null);
           }}
         />
       )}

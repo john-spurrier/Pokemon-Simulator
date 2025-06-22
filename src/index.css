@@ -163,6 +163,17 @@ body {
   border: 3px solid #ffd700;
   border-radius: 10px;
   background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active-pokemon .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .active-pokemon .card-image {
@@ -202,6 +213,22 @@ body {
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: bold;
+}
+
+.active-pokemon-overlay .closeup-button {
+  background: #4CAF50;
+  padding: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.active-pokemon-overlay .closeup-button:hover {
+  background: #45a049;
 }
 
 .discard-btn {
@@ -314,16 +341,29 @@ body {
   width: 100px;
   height: 150px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bench-pokemon {
   width: 100px;
   height: 150px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   border: 2px solid #4a90e2;
   border-radius: 8px;
   background: white;
   transition: transform 0.2s;
+}
+
+.bench-pokemon .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .bench-pokemon:hover {
@@ -368,6 +408,22 @@ body {
   cursor: pointer;
   font-size: 0.7rem;
   font-weight: bold;
+}
+
+.bench-pokemon-overlay .closeup-button {
+  background: #4CAF50;
+  padding: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.bench-pokemon-overlay .closeup-button:hover {
+  background: #45a049;
 }
 
 .remove-bench-btn {
@@ -691,6 +747,13 @@ body {
   opacity: 1;
 }
 
+.attach-card-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
 .attach-confirm-btn {
   background: #27ae60;
   color: white;
@@ -941,6 +1004,12 @@ body {
 
 .attached-card-display:hover .attached-card-display-overlay {
   opacity: 1;
+}
+
+.attached-card-buttons {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .card-info {
@@ -1201,4 +1270,141 @@ body {
   justify-content: center;
   font-size: 1rem;
   font-weight: bold;
+}
+
+/* Card health display - always visible */
+.card-health-display {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.health-text {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+/* Card overlay buttons */
+.card-overlay-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.health-button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.closeup-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.closeup-button:hover {
+  background: #45a049;
+}
+
+/* Card close-up modal */
+.card-closeup-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.card-closeup-content {
+  background: white;
+  border-radius: 15px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.card-closeup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0 20px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.card-closeup-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.card-closeup-image-container {
+  padding: 0 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-closeup-image {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-closeup-info {
+  padding: 0 20px 20px 20px;
+  background: #f8f9fa;
+  border-radius: 0 0 15px 15px;
+}
+
+.card-health, .card-attached {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #333;
 } 
