@@ -192,7 +192,10 @@ function App() {
 
     const newBench = benchPokemon.filter(c => c.id !== cardId);
     setBenchPokemon(newBench);
-    setHand([...hand, card]);
+    
+    // Return the main card and all its attached cards to hand
+    const cardsToReturn = [card, ...card.attachedCards];
+    setHand([...hand, ...cardsToReturn]);
   };
 
   // Attach card to Pokemon (evolution, energy, etc.)
