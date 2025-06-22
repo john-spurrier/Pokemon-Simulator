@@ -486,7 +486,7 @@ function App() {
               Load Your 60-Card Deck
             </label>
             <p className="file-input-hint">
-              Select exactly 60 card images to begin your adventure!
+              Select exactly 60 card images to start!
             </p>
           </div>
         </div>
@@ -523,7 +523,7 @@ function App() {
               </div>
             </div>
             <p className="start-game-hint">
-              It's time to battle! Start the game or give your deck a shuffle.
+              Shuffle your deck then click start game to begin!
             </p>
             <div className="start-game-buttons">
               <button className="control-button start-game" onClick={startGame}>
