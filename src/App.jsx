@@ -456,43 +456,73 @@ function App() {
     <div className="app">
       <div className="header">
         <h1>Pokemon TCG Simulator</h1>
-        <p>Load your 60-card deck and start playing!</p>
       </div>
 
       {!deck.length && (
-        <div className="file-input-container">
-          <input
-            ref={fileInputRef}
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleFileLoad}
-            className="file-input"
-            id="card-files"
-          />
-          <label htmlFor="card-files" className="file-input-label">
-            Select 60 Card Images
-          </label>
+        <div className="homepage-container">
+          <div className="file-input-container">
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleFileLoad}
+              className="file-input"
+              id="card-files"
+            />
+            <label htmlFor="card-files" className="file-input-label">
+              Load Your 60-Card Deck
+            </label>
+            <p className="file-input-hint">
+              Select exactly 60 card images to begin your adventure!
+            </p>
+          </div>
         </div>
       )}
 
-      {loading && <div className="loading">Loading cards...</div>}
+      {loading && (
+        <div className="loading-container">
+          <div className="loading-pokeball"></div>
+          <p>Loading your deck...</p>
+        </div>
+      )}
       
-      {error && <div className="error">{error}</div>}
+      {error && (
+        <div className="error-container">
+          <div className="error-icon">⚠️</div>
+          <p>{error}</p>
+          <button 
+            onClick={() => setError('')}
+            className="error-close-button"
+          >
+            OK
+          </button>
+        </div>
+      )}
 
       {deck.length > 0 && !gameStarted && (
         <div className="start-game-container">
           <div className="deck-info">
-            <h3>Deck Ready!</h3>
-            <p>Your deck has {deck.length} cards</p>
-            <button className="control-button start-game" onClick={startGame}>
-              <Play size={20} />
-              Start Game (Draw 7 Cards)
-            </button>
-            <button className="control-button" onClick={shuffleDeck}>
-              <Shuffle size={20} />
-              Shuffle Deck
-            </button>
+            <h3 className="deck-ready-title">Your Deck is Ready!</h3>
+            <div className="deck-stats">
+              <div className="deck-stat">
+                <span className="deck-stat-value">{deck.length}</span>
+                <span className="deck-stat-label">Cards</span>
+              </div>
+            </div>
+            <p className="start-game-hint">
+              It's time to battle! Start the game or give your deck a shuffle.
+            </p>
+            <div className="start-game-buttons">
+              <button className="control-button start-game" onClick={startGame}>
+                <Play size={20} />
+                Start Game
+              </button>
+              <button className="control-button" onClick={shuffleDeck}>
+                <Shuffle size={20} />
+                Shuffle Deck
+              </button>
+            </div>
           </div>
         </div>
       )}
