@@ -120,6 +120,16 @@ function App() {
     setHand([...hand, drawnCard]);
   };
 
+  // Move card from hand to bottom of deck
+  const moveCardToBottomOfDeck = (cardId) => {
+    const card = hand.find(c => c.id === cardId);
+    if (!card) return;
+
+    const newHand = hand.filter(c => c.id !== cardId);
+    setHand(newHand);
+    setDeck([...deck, card]); // Add to bottom of deck
+  };
+
   // Place card as active Pokemon
   const placeActivePokemon = (cardId) => {
     const card = hand.find(c => c.id === cardId);
@@ -366,15 +376,14 @@ function App() {
 
   // Search and add card to hand
   const searchAndAddCard = (card) => {
-    const newCard = {
-      ...card,
-      id: Date.now() + Math.random(),
-      health: 100,
-      position: { x: 0, y: 0 },
-      attachedCards: [],
-      isEvolved: false
-    };
-    setHand([...hand, newCard]);
+    // Find the original card in the deck and remove it
+    const cardIndex = deck.findIndex(c => c.id === card.id);
+    if (cardIndex !== -1) {
+      const newDeck = [...deck];
+      const selectedCard = newDeck.splice(cardIndex, 1)[0];
+      setDeck(newDeck);
+      setHand([...hand, selectedCard]);
+    }
     setShowSearch(false);
   };
 
@@ -870,6 +879,16 @@ function App() {
                           title="View close-up"
                         >
                           <Eye size={16} />
+                        </button>
+                        <button 
+                          className="deck-bottom-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            moveCardToBottomOfDeck(card.id);
+                          }}
+                          title="Move to bottom of deck"
+                        >
+                          <Shuffle size={16} />
                         </button>
                         <button 
                           className="discard-btn"

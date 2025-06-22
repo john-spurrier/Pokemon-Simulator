@@ -903,16 +903,18 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 20px;
 }
 
 .search-content {
   background: white;
   padding: 30px;
   border-radius: 15px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
+  max-width: 800px;
+  width: 95%;
+  max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .search-input {
@@ -939,6 +941,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s;
+  position: relative;
 }
 
 .search-result-card:hover {
@@ -1596,4 +1599,41 @@ body {
   margin: 10px 0;
   font-size: 1rem;
   color: #333;
+}
+
+.deck-bottom-button {
+  background: #FF9800;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.deck-bottom-button:hover {
+  background: #F57C00;
+}
+
+.search-results::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-results::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+  background: #555;
 } 
